@@ -58,6 +58,9 @@ class Fraction:
         denominator = self.denominator * other.numerator
         return self.__get_class(numerator, denominator)
 
+    def __idiv__(self, other):
+        return self.__divmod__(other)
+
     def __float__(self):
         return self.numerator / self.denominator
 
