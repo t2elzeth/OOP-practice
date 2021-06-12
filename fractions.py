@@ -1,24 +1,6 @@
 SPLITTER = '/'
 
 
-class StringFraction:
-    def __init__(self, str_fraction, splitter: str = SPLITTER):
-        splitted_fraction = str_fraction.split(splitter)
-        numerator = splitted_fraction[0]
-        denominator = splitted_fraction[1]
-
-        self.numerator = int(numerator)
-        self.denominator = int(denominator)
-        self.splitter = splitter
-
-
-class SplittedFraction:
-    def __init__(self, numerator: int, denominator: int):
-        self.numerator = numerator
-        self.denominator = denominator
-        self.splitter = SPLITTER
-
-
 class Fraction:
     def __init__(self, str_fraction: str = None,
                  numerator: int = None,
@@ -30,7 +12,7 @@ class Fraction:
         if str_fraction is not None:
             if splitter not in str_fraction:
                 raise ValueError(f'Invalid splitter for `{str_fraction}` provided. Current: {splitter}')
-            
+
             splitted_fraction = str_fraction.split(splitter)
             numerator = int(splitted_fraction[0])
             denominator = int(splitted_fraction[1])
