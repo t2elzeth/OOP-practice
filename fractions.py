@@ -1,8 +1,8 @@
 SPLITTER = '/'
 
 
-class Fraction:
-    def __init__(self, str_fraction: str, splitter: str = SPLITTER):
+class StringFraction:
+    def __init__(self, str_fraction, splitter: str = SPLITTER):
         splitted_fraction = str_fraction.split(splitter)
         numerator = splitted_fraction[0]
         denominator = splitted_fraction[1]
@@ -11,11 +11,36 @@ class Fraction:
         self.denominator = int(denominator)
         self.splitter = splitter
 
-    def __format_fraction(self, numerator, denominator):
-        return f'{numerator}{self.splitter}{denominator}'
+
+class SplittedFraction:
+    def __init__(self, numerator: int, denominator: int):
+        self.numerator = numerator
+        self.denominator = denominator
+        self.splitter = SPLITTER
+
+
+class Fraction:
+    def __init__(self, str_fraction: str = None,
+                 numerator: int = None,
+                 denominator: int = None,
+                 splitter: str = SPLITTER):
+        if str_fraction is None and numerator is None and denominator is None:
+            raise ValueError('Provide either `str_fraction` or numerator and denominator')
+
+        if str_fraction is not None:
+            if splitter not in str_fraction:
+                raise ValueError(f'Invalid splitter for `{str_fraction}` provided. Current: {splitter}')
+            
+            splitted_fraction = str_fraction.split(splitter)
+            numerator = int(splitted_fraction[0])
+            denominator = int(splitted_fraction[1])
+
+        self.numerator = numerator
+        self.denominator = denominator
+        self.splitter = splitter
 
     def __get_class(self, numerator, denominator):
-        return self.__class__(self.__format_fraction(numerator, denominator), self.splitter)
+        return self.__class__(numerator=numerator, denominator=denominator, splitter=SPLITTER)
 
     def __add__(self, other):
         if self.denominator != other.denominator:
